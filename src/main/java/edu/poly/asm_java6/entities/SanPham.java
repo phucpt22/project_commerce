@@ -1,5 +1,6 @@
 package edu.poly.asm_java6.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,6 +46,7 @@ public class SanPham {
     @JoinColumn(name = "id_ChungLoai")
     private ChungLoai chungLoai;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sanPham")
     private Set<DonDatChiTiet> donDatChiTiets;
 }

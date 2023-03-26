@@ -1,5 +1,6 @@
 package edu.poly.asm_java6.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,6 +57,7 @@ public class NguoiDung {
     @Column(name = "vaiTro", nullable = false)
     private Boolean vaiTro = false;
 
+    @JsonIgnore
     @OneToMany(mappedBy ="nguoiDung" )
     private Set<DonDatHang> donDatHangs;
 }
