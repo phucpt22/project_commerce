@@ -1,4 +1,4 @@
-package com.poly;
+package edu.poly.asm_java6;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

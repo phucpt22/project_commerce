@@ -1,4 +1,4 @@
-package com.poly;
+package edu.poly.asm_java6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
