@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import edu.poly.asm_java6.entities.NguoiDung;
 import edu.poly.asm_java6.entities.SanPham;
 import edu.poly.asm_java6.entities.Item;
 import edu.poly.asm_java6.reponsitory.NguoiDungRepository;
+import edu.poly.asm_java6.reponsitory.SanPhamRepository;
 import edu.poly.asm_java6.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class CartServiceImpl implements CartService {
 
 	@Autowired
-	NguoiDungRepository dao;
+	SanPhamRepository dao;
 
 	Map<Integer, Item> map = new HashMap<>();
 
@@ -34,10 +36,10 @@ public class CartServiceImpl implements CartService {
 			SanPham p = new SanPham();
 			List<SanPham> list = dao.findAll();
 			p = list.stream().filter(it -> it.getId_SP() == id).collect(Collectors.toList()).get(0);
-			item.setId(p.getId());
-			item.setName(p.getName());
-			item.setImg(p.getImg());
-			item.setPrice(p.getPrice());
+			item.setId(p.getId_SP());
+			item.setName(p.getTenSP());
+			item.setImg(p.getHAnh());
+			item.setPrice(p.getGia());
 			item.setQty(1);
 			map.put(id, item);
 		} else {
