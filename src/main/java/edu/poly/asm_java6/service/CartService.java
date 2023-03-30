@@ -2,7 +2,6 @@ package edu.poly.asm_java6.service;
 
 import java.util.Collection;
 
-import com.sun.mail.imap.protocol.Item;
 import edu.poly.asm_java6.entities.*;
 
 public interface CartService {

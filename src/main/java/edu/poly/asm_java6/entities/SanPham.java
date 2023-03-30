@@ -19,7 +19,7 @@ public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_SP", nullable = false)
-    private Long id_SP;
+    private Integer id_SP;
 
     @Column
     private String tenSP,hAnh,moTa;
