@@ -1,8 +1,8 @@
 ﻿--DROP DATABASE AsmJava6
 
-CREATE DATABASE AsmJava6
+CREATE DATABASE AsmJava66
 GO
-USE AsmJava6
+USE AsmJava66
 GO
 
 --Tạo bảng
@@ -26,22 +26,21 @@ CREATE TABLE ChungLoai (
 	id_ChungLoai int identity(1,1) primary key,
 	tenChungLoai nvarchar(50)	
 )
-
-GO
-CREATE TABLE ThuongHieu (
-	id_ThuongHieu int identity(1,1) primary key,
-	tenThuongHieu nvarchar(50)	
-)
-
 GO
 
-CREATE TABLE ChatLieu (
-	id_ChatLieu int identity(1,1) primary key,
-	tenchatLieu nvarchar(50)	
+
+CREATE TABLE VaiTro (
+	id_VaiTro int identity(1,1) primary key,
+	tenVaiTro nvarchar(50)	
 )
 GO
 
-
+CREATE TABLE CapQuyen (
+	id_CapQuyen int identity(1,1) primary key,
+	id_NguoiDung int,
+	id_VaiTro int
+)
+GO
 CREATE TABLE SanPham (
 	id_SP int identity(1,1) primary key, 
 	tenSP nvarchar(250),	
@@ -51,8 +50,6 @@ CREATE TABLE SanPham (
 	slTonKho int,	
 	moTa nvarchar(250),
 	id_ChungLoai int,
-	id_ThuongHieu int,
-	id_ChatLieu int,
 	is_Delete bit --Trạng thái xóa khỏi danh sách SP chưa 
 	
 )
@@ -85,10 +82,11 @@ GO
 
 -- SanPham
 ALTER TABLE SanPham ADD CONSTRAINT FK_SanPham_ChungLoai FOREIGN KEY (id_ChungLoai) REFERENCES ChungLoai(id_ChungLoai) ON DELETE SET NULL ON UPDATE NO ACTION;
-ALTER TABLE SanPham  ADD CONSTRAINT FK_SanPham_ThuongHieu FOREIGN KEY (id_ThuongHieu) REFERENCES ThuongHieu(id_ThuongHieu) ON DELETE SET NULL ON UPDATE NO ACTION;
-ALTER TABLE SanPham ADD CONSTRAINT FK_SanPham_Chatlieu FOREIGN KEY (id_ChatLieu) REFERENCES ChatLieu(id_ChatLieu) ON DELETE SET NULL ON UPDATE NO ACTION;
 go
-
+--Cap quyen
+ALTER TABLE CapQuyen ADD CONSTRAINT FK_IDnguoiDung FOREIGN KEY (id_NguoiDung) REFERENCES NguoiDung(id_NguoiDung) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE CapQuyen ADD CONSTRAINT FK_IDvaiTro FOREIGN KEY (id_VaiTro) REFERENCES VaiTro(id_VaiTro) ON DELETE NO ACTION ON UPDATE CASCADE;
+go
 -- Dondathang
 ALTER TABLE DonDatHang ADD CONSTRAINT FK_DonDatHang_NguoiDung FOREIGN KEY (id_NguoiDung) REFERENCES NguoiDung(id_NguoiDung) ON DELETE NO ACTION ON UPDATE CASCADE;
 go
@@ -115,7 +113,27 @@ INSERT INTO NguoiDung VALUES
 					('0344584950', N'Nguyễn Trần Anh Tú', '1996-10-21', 1, 'tups12938@fpt.edu.vn', 'anh2.png','tu123','tu123', N'123, Quận 12',1,1),
 					('0338515125', N'Phạm Trọng Phúc', '2002-12-01', 1, 'phucptps19445@fpt.edu.vn', 'anh1.png','phuc123','phuc123', N'958 Quang Trung, Phường 10, Gò Vấp',1,1)				  
 GO
-
+--Bảng vai trò
+INSERT INTO VaiTro VALUES
+					(N'Khách hàng'),
+					(N'Nhân viên'),
+					(N'Quản lý')
+GO
+--Bảng cấp quyền
+INSERT INTO CapQuyen VALUES
+					(1,1),
+					(2,1),
+					(3,2),
+					(4,2),
+					(5,2),
+					(6,2),
+					(7,2),
+					(8,2),
+					(9,3),
+					(10,3),
+					(11,3),
+					(12,3)
+GO
 --Bảng ChungLoai
 INSERT INTO ChungLoai VALUES 
 					(N'Nhẫn'),
@@ -126,40 +144,22 @@ INSERT INTO ChungLoai VALUES
 					(N'Kiềng')
 GO
 
---Bảng Danh Mục
-INSERT INTO ChatLieu VALUES 
-					(N'Vàng 10K'),
-					(N'Vàng 14K'),
-					(N'Vàng 18K'),
-					(N'Vàng 22K'),
-					(N'Vàng 24K')
-GO
-
---Bảng Danh Mục
-INSERT INTO ThuongHieu VALUES 
-					(N'PNJ'),
-					(N'PNJ Silver'),
-					(N'PNJ Disney'),
-					(N'PNJ Style'),
-					(N'PNJ Watch')
-GO
-
 --Bảng Sản Phẩm
 INSERT INTO SanPham VALUES 
-					(N'Đồng hồ Calvin Klein Nam 25200117 Dây Kim Loại 44 mm',1,N'25200117.jpg',5796000,300,N'Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy đồng hồ Thụy Sỹ chất lượng. Những chiếc đồng hồ Calvin Klein là món phụ kiện hoàn hảo cho những tín đồ thời trang',4,5,4,1),
-					(N'Đồng hồ Calvin Klein Nam 25200116 Dây Kim Loại 44 mm',1,N'25200116.jpg',4446000,300,N'Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy đồng hồ Thụy Sỹ chất lượng. Những chiếc đồng hồ Calvin Klein là món phụ kiện hoàn hảo cho những tín đồ thời trang',4,5,5,1),
-					(N'Bông tai Bạc đính Ngọc Trai PNJSilver PMXMW000001',1,N'PMXMW000001.jpg',798000,300,N'Bông tai Bạc là sự hợp nhãn hiệu thời trang nổi tiếng của Mỹ, hoạt động từ năm 2000. Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy Bông tai Bạc chất lượng.',2,2,2,1),
-					(N'Bông tai Bạc đính đá STYLE By PNJ Sexy ZTMXW000012',1,N'ZTMXW000012.jpg',796000,300,N'Bông tai Bạc là sự hợp nhãn hiệu thời trang nổi tiếng của Mỹ, hoạt động từ năm 2000. Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy Bông tai Bạc chất lượng.',2,1,1,1),
-					(N'Nhẫn Vàng đính đá Synthetic Disney|PNJ ZTXMX000003',1,N'ZTXMX000003.jpg',3796000,300,N'Có thể nói, sản phẩm này như là lời ví von xinh đẹp mà Disney|PNJ gửi tặng đến các giai nhân. Vì nàng luôn biết cách rực rỡ theo sắc màu riêng, như cầu vồng tản ánh sắc không bao giờ trùng lắp.',1,3,1,1),
-					(N'Nhẫn bạc đính đá STYLE by PNJ Feminine XMXMY060002',1,N'XMXMY060002.jpg',2796000,300,N'Có thể nói, sản phẩm này như là lời ví von xinh đẹp mà Disney|PNJ gửi tặng đến các giai nhân. Vì nàng luôn biết cách rực rỡ theo sắc màu riêng, như cầu vồng tản ánh sắc không bao giờ trùng lắp.',1,1,3,1),
-					(N'Dây cổ Bạc đính đá STYLE By PNJ Sweet Spring ZTZTW000005',1,N'ZTZTW000005.jpg',876000,300,N'Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày.',5,4,3,1),
-					(N'Dây cổ Bạc đính đá STYLE By PNJ DNA XM00H000018',1,N'XM00H000018.jpg',2234000,300,N'Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày.',5,4,5,1),
-					(N'Lắc tay đính đá Disney|PNJ Mickey&Minnie ZTXMZ000001',1,N'ZTXMZ000001.jpg',10544000,300,N'Đặc biệt hơn, chiếc lắc tay sẽ trở nên ý nghĩa hơn khi trở thành món quà ghi dấu yêu thương vào những dịp quan trọng. Đây chắc chắn sẽ là thứ giúp bạn gắn kết những khoảnh khắc đáng nhớ với mình hoặc người thương.',3,5,4,1),
-					(N'Lắc tay Vàng cưới 24K PNJ 0000Y002317',1,N'0000Y002317.jpg',15332000,300,N'Đặc biệt hơn, chiếc lắc tay sẽ trở nên ý nghĩa hơn khi trở thành món quà ghi dấu yêu thương vào những dịp quan trọng. Đây chắc chắn sẽ là thứ giúp bạn gắn kết những khoảnh khắc đáng nhớ với mình hoặc người thương.',3,5,1,1),
-					(N'Kiềng cưới Vàng 24K PNJ 0000Y060001',1,N'0000Y060001.jpg',18496000,300,N'Với các điểm nhấn trên sản phẩm, PNJ tin rằng nàng sẽ trở nên thật sự tỏa sáng và nổi bật khi trưng diện chúng.',4,1,5,1),
-					(N'Kiềng cưới Vàng 24K PNJ 1000Y060001',1,N'1000Y060001.jpg',16798000,300,N'Với các điểm nhấn trên sản phẩm, PNJ tin rằng nàng sẽ trở nên thật sự tỏa sáng và nổi bật khi trưng diện chúng.',4,5,5,1),
-					(N'Cặp nhẫn cưới ECZ PNJ 00005-00013',1,N'00005-00013.jpg',15888000,300,N'Không chỉ có vai trò là vật đính ước thiêng liêng, nhẫn cưới kim cương còn thể hiện cá tính và phong cách của mỗi cặp đôi. Tại PNJ, các cặp đôi luôn có thể sở hữu những thiết kế nhẫn cưới kim cương vừa hợp lí về tài chính, vừa đẹp về mẫu mã.',1,1,5,1),
-					(N'Cặp nhẫn cưới Kim cương 00990-00976',1,N'00990-00976.jpg',19999000,300,N'Không chỉ có vai trò là vật đính ước thiêng liêng, nhẫn cưới kim cương còn thể hiện cá tính và phong cách của mỗi cặp đôi. Tại PNJ, các cặp đôi luôn có thể sở hữu những thiết kế nhẫn cưới kim cương vừa hợp lí về tài chính, vừa đẹp về mẫu mã.',1,1,5,1)
+					(N'Đồng hồ Calvin Klein Nam 25200117 Dây Kim Loại 44 mm',1,N'25200117.jpg',5796000,300,N'Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy đồng hồ Thụy Sỹ chất lượng. Những chiếc đồng hồ Calvin Klein là món phụ kiện hoàn hảo cho những tín đồ thời trang',4,1),
+					(N'Đồng hồ Calvin Klein Nam 25200116 Dây Kim Loại 44 mm',1,N'25200116.jpg',4446000,300,N'Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy đồng hồ Thụy Sỹ chất lượng. Những chiếc đồng hồ Calvin Klein là món phụ kiện hoàn hảo cho những tín đồ thời trang',4,1),
+					(N'Bông tai Bạc đính Ngọc Trai PNJSilver PMXMW000001',1,N'PMXMW000001.jpg',798000,300,N'Bông tai Bạc là sự hợp nhãn hiệu thời trang nổi tiếng của Mỹ, hoạt động từ năm 2000. Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy Bông tai Bạc chất lượng.',2,1),
+					(N'Bông tai Bạc đính đá STYLE By PNJ Sexy ZTMXW000012',1,N'ZTMXW000012.jpg',796000,300,N'Bông tai Bạc là sự hợp nhãn hiệu thời trang nổi tiếng của Mỹ, hoạt động từ năm 2000. Với lối thiết kế hợp thời trang, đơn giản nhưng vẫn có nét độc đáo riêng, được kết hợp cùng bộ máy Bông tai Bạc chất lượng.',2,1),
+					(N'Nhẫn Vàng đính đá Synthetic Disney|PNJ ZTXMX000003',1,N'ZTXMX000003.jpg',3796000,300,N'Có thể nói, sản phẩm này như là lời ví von xinh đẹp mà Disney|PNJ gửi tặng đến các giai nhân. Vì nàng luôn biết cách rực rỡ theo sắc màu riêng, như cầu vồng tản ánh sắc không bao giờ trùng lắp.',1,1),
+					(N'Nhẫn bạc đính đá STYLE by PNJ Feminine XMXMY060002',1,N'XMXMY060002.jpg',2796000,300,N'Có thể nói, sản phẩm này như là lời ví von xinh đẹp mà Disney|PNJ gửi tặng đến các giai nhân. Vì nàng luôn biết cách rực rỡ theo sắc màu riêng, như cầu vồng tản ánh sắc không bao giờ trùng lắp.',1,1),
+					(N'Dây cổ Bạc đính đá STYLE By PNJ Sweet Spring ZTZTW000005',1,N'ZTZTW000005.jpg',876000,300,N'Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày.',5,1),
+					(N'Dây cổ Bạc đính đá STYLE By PNJ DNA XM00H000018',1,N'XM00H000018.jpg',2234000,300,N'Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày.',5,1),
+					(N'Lắc tay đính đá Disney|PNJ Mickey&Minnie ZTXMZ000001',1,N'ZTXMZ000001.jpg',10544000,300,N'Đặc biệt hơn, chiếc lắc tay sẽ trở nên ý nghĩa hơn khi trở thành món quà ghi dấu yêu thương vào những dịp quan trọng. Đây chắc chắn sẽ là thứ giúp bạn gắn kết những khoảnh khắc đáng nhớ với mình hoặc người thương.',3,1),
+					(N'Lắc tay Vàng cưới 24K PNJ 0000Y002317',1,N'0000Y002317.jpg',15332000,300,N'Đặc biệt hơn, chiếc lắc tay sẽ trở nên ý nghĩa hơn khi trở thành món quà ghi dấu yêu thương vào những dịp quan trọng. Đây chắc chắn sẽ là thứ giúp bạn gắn kết những khoảnh khắc đáng nhớ với mình hoặc người thương.',3,1),
+					(N'Kiềng cưới Vàng 24K PNJ 0000Y060001',1,N'0000Y060001.jpg',18496000,300,N'Với các điểm nhấn trên sản phẩm, PNJ tin rằng nàng sẽ trở nên thật sự tỏa sáng và nổi bật khi trưng diện chúng.',4,1),
+					(N'Kiềng cưới Vàng 24K PNJ 1000Y060001',1,N'1000Y060001.jpg',16798000,300,N'Với các điểm nhấn trên sản phẩm, PNJ tin rằng nàng sẽ trở nên thật sự tỏa sáng và nổi bật khi trưng diện chúng.',4,1),
+					(N'Cặp nhẫn cưới ECZ PNJ 00005-00013',1,N'00005-00013.jpg',15888000,300,N'Không chỉ có vai trò là vật đính ước thiêng liêng, nhẫn cưới kim cương còn thể hiện cá tính và phong cách của mỗi cặp đôi. Tại PNJ, các cặp đôi luôn có thể sở hữu những thiết kế nhẫn cưới kim cương vừa hợp lí về tài chính, vừa đẹp về mẫu mã.',1,1),
+					(N'Cặp nhẫn cưới Kim cương 00990-00976',1,N'00990-00976.jpg',19999000,300,N'Không chỉ có vai trò là vật đính ước thiêng liêng, nhẫn cưới kim cương còn thể hiện cá tính và phong cách của mỗi cặp đôi. Tại PNJ, các cặp đôi luôn có thể sở hữu những thiết kế nhẫn cưới kim cương vừa hợp lí về tài chính, vừa đẹp về mẫu mã.',1,1)
 						 
 GO
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col mb-3" th:each="p : ${items}">
+    <div class="card w-100 h-100" style="width: 18rem;">
+
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <a class="d-flex justify-content-center" th:href="@{|/product/detail/${p.id_SP}|}">
+                <img class="card-img-top" style="width: 70%;"/>
+            </a>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title m-1" th:text="${p.tenSP}"></h5>
+        </div>
+
+        <div class="card-footer d-flex bg-transparent border-dark">
+            <b class="w-100 d-flex align-items-center text-danger">Price:
+                [[${p.gia}]]$</b>
+            <button class="btn btn-outline-light flex-shrink-1 fs-5"
+                    >
+                <i class="text-success fa-solid fa-cart-plus"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

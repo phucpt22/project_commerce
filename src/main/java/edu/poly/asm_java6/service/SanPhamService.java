@@ -11,19 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SanPhamService {
-    void deleteById(Integer id);
-
     List<SanPham> findAll();
 
-    Optional<SanPham> findById(Integer id);
+    SanPham findById(Integer id);
 
-    Page<SanPham> findAll(Integer page, Integer limit);
+    List<SanPham> findByIDChungLoai(Integer cid);
 
-    SanPham save(SanPhamDto productModel) throws IllegalAccessException, InvocationTargetException, ParseException;
+    SanPham create(SanPham SanPham);
 
-    <S extends SanPham> S save(S entity);
+    SanPham update(SanPham SanPham);
 
-    Page<SanPham> findAllByNameLike(String name, Pageable pageable);
-
-    Page<SanPham> findByField(Integer page, Integer limit, String field, String name);
+    void delete(Integer id);
 }

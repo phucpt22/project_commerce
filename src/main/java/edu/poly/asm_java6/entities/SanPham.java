@@ -36,13 +36,6 @@ public class SanPham {
     private int slTonKho;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_ThuongHieu")
-    private ThuongHieu thuongHieu;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_ChatLieu")
-    private ChatLieu chatLieu;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_ChungLoai")
     private ChungLoai chungLoai;
 

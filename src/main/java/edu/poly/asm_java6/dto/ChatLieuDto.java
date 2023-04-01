@@ -1,6 +1,5 @@
 package edu.poly.asm_java6.dto;
 
-import edu.poly.asm_java6.entities.ChatLieu;
 import lombok.Data;
 
 import java.io.Serializable;
