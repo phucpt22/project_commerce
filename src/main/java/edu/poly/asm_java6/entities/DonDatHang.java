@@ -2,50 +2,47 @@ package edu.poly.asm_java6.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "DonDatHang")
 public class DonDatHang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_DDH", nullable = false)
+    //@Column(name = "id_DDH")
     private int id_DDH;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date ngayDat;
 
-    @Column(name = "ghiChuKH")
+    //@Column(name = "ghiChuKH")
     private String ghiChuKH;
 
-    @Column(name = "tongTien")
+    //@Column(name = "tongTien")
     private Double tongTien;
 
-    @Column(name = "soDT", length = 15)
+    //@Column(name = "soDT", length = 15)
     private String soDT;
 
-    @Column(name = "diaChi")
+    //@Column(name = "diaChi")
     private String diaChi;
 
-    @Column(name = "trangThaiDH", nullable = false, columnDefinition = "0")
+    //@Column(name = "trangThaiDH", nullable = false, columnDefinition = "0")
     private int trangThaiDH;
 
     @JsonIgnore
     @OneToMany(mappedBy = "donDatHang")
-    private Set<DonDatChiTiet> donDatChiTiets;
+    private List<DonDatChiTiet> donDatChiTiets;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_NguoiDung")
     private NguoiDung nguoiDung;
 }

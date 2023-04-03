@@ -18,24 +18,24 @@ import java.util.Set;
 public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_SP", nullable = false)
+    //@Column(name = "id_SP", nullable = false)
     private Integer id_SP;
 
-    @Column
+    //@Column
     private String tenSP,hAnh,moTa;
 
-    @Column(name = "is_Delete", columnDefinition = "true")
+    //@Column(name = "is_Delete", columnDefinition = "true")
     private Boolean is_Delete;
-    @Column(name = "trangThai", columnDefinition = "true")
+    //@Column(name = "trangThai", columnDefinition = "true")
     private Boolean trangThai;
 
-    @Column(name = "gia")
+    //@Column(name = "gia")
     private Double gia;
 
-    @Column(name = "slTonKho", nullable = false)
+    //@Column(name = "slTonKho", nullable = false)
     private int slTonKho;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_ChungLoai")
     private ChungLoai chungLoai;
 

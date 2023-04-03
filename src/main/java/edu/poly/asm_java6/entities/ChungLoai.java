@@ -17,13 +17,12 @@ import java.util.Set;
 @Table(name = "ChungLoai")
 public class ChungLoai {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ChungLoai", nullable = false)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name = "id_ChungLoai")
     private Integer id_ChungLoai;
 
-    @Column(name = "tenChungLoai")
+    //@Column(name = "tenChungLoai")
     private String tenChungLoai;
 
     @JsonIgnore
