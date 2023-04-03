@@ -2,19 +2,16 @@ package edu.poly.asm_java6.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "NguoiDung")
 public class NguoiDung {
@@ -58,6 +55,10 @@ public class NguoiDung {
     private Boolean vaiTro = false;
 
     @JsonIgnore
-    @OneToMany(mappedBy ="nguoiDung" )
+    @OneToMany(mappedBy ="NguoiDung" )
     private Set<DonDatHang> donDatHangs;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "NguoiDung")
+    List<CapQuyen> authorities;
 }

@@ -24,7 +24,7 @@ public class ProductController {
 
     @RequestMapping("/product/list")
     public String list(Model model, @RequestParam("cid") Optional<Integer> cid) {
-        List<SanPham> list,list2,list3;
+        List<SanPham> list;
         if (cid.isPresent()) {
             list= productService.findByIDChungLoai(cid.get());
         }else {

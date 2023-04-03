@@ -1,22 +1,12 @@
 package edu.poly.asm_java6.service.impl;
 
-import edu.poly.asm_java6.dto.SanPhamDto;
 import edu.poly.asm_java6.entities.SanPham;
 import edu.poly.asm_java6.reponsitory.SanPhamRepository;
 import edu.poly.asm_java6.service.SanPhamService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SanPhamServiceImpl implements SanPhamService {

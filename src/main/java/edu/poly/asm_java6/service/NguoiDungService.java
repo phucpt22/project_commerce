@@ -7,6 +7,8 @@ import java.util.List;
 public interface NguoiDungService {
     List<NguoiDung> findAll();
 
+    List<NguoiDung> getAdministrators();
+
     NguoiDung findById(Integer id);
 
     NguoiDung create(NguoiDung NguoiDung);

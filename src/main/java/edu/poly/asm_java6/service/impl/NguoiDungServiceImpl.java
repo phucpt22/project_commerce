@@ -18,6 +18,11 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     }
 
     @Override
+    public List<NguoiDung> getAdministrators() {
+        return NguoiDungRepository.getAdministrators();
+    }
+
+    @Override
     public NguoiDung findById(Integer id) {
         return NguoiDungRepository.findById(id).get();
     }
