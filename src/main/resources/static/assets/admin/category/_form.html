@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+  <h3>CATEGORY EDITION</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-md-4 text-center">
+          
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="row" >
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Id</label>
+                <input ng-model="form.id" type="text" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Name</label>
+                <input ng-model="form.name" class="form-control" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <button ng-click="create()" type="button" class="btn btn-primary">
+      <i class="fa-solid fa-plus"></i> Create
+    </button>
+    <button ng-click="update()" type="button" class="btn btn-success">
+      <i class="fa-solid fa-download"></i> Update
+    </button>
+    <button ng-click="delete(form)" type="button" class="btn btn-danger">
+      <i class="fa-solid fa-trash"></i> Delete
+    </button>
+    <button ng-click="reset()" type="button" class="btn btn-info">
+      <i class="fa-solid fa-arrows-rotate"></i> Reset
+    </button>
+  </div>
+</div>

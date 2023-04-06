@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">Trang chủ</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li th:replace="/layout/_category.html"></li>
+				<li th:replace="/layout/filter.html"></li>
+				<input  class="form-control" style="display: flex;justify-content: center;" type="search" placeholder="Search" aria-label="Search"
+
+				/>
+			</ul>
+
+			<div class="d-flex">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li th:replace="/layout/_cart-info.html"></li>
+					<li class="nav-item dropdown"><a class="nav-link active dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<span th:if="${#request.remoteUser}">Chào mừng [[${#request.remoteUser}]]</span>
+							<span th:unless="${#request.remoteUser}">Tài khoản</span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<th:block th:unless="${#request.remoteUser}">
+								<li class="nav-item">
+									<a class="dropdown-item" th:href="@{/security/login/form}">Đăng nhập</a>
+								</li>
+							</th:block>
+
+							<th:block th:if="${#request.remoteUser}">
+								<li class="nav-item"><a class="dropdown-item" th:href="@{/security/logoff}">Đăng
+										xuất</a></li>
+								<li class="nav-item"><a class="dropdown-item" th:href="@{/order/list}">Đơn đặt hàng của
+										bạn</a>
+								</li>
+								<li class="nav-item"
+									th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
+									<a class="dropdown-item" th:href="@{/admin/home/index}">Trang quản trị</a>
+								</li>
+							</th:block>
+
+
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-header text-center">
+  <h3>PRODUCT EDITION</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-md-4 text-center">
+          <img ng-src="/assets/images/{{form.image}}" class="img-fluid rounded-start"/>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="row" >
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Name</label>
+                <input ng-model="form.name" type="text" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Price</label>
+                <input ng-model="form.price" class="form-control" />
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Image</label>
+                <input class="form-control" type="file" id="formFile" 
+                onchange="angular.element(this).scope().imageChanged(this.files)"/>
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Category</label>
+                <select
+                  ng-model="form.category.id"
+                  class="form-select"
+                >
+                  <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Create Date</label>
+                <input
+                  ng-model="form.createDate"
+                  type="date"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label">Available?</label>
+                <div
+                  class="form-control btn-group p-0"
+                  role="group"
+                  aria-label="Basic radio toggle button group"
+                >
+                  <input 
+				  ng-model="form.available"
+				  ng-value="true"
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="btnradio1"
+                    autocomplete="off"
+                  />
+                  <label class="btn btn-outline-success py-1" for="btnradio1"
+                    >Yes</label
+                  >
+                  <input
+				  ng-model="form.available"
+				  ng-value="false"
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="btnradio2"
+                    autocomplete="off"
+                  />
+                  <label class="btn btn-outline-danger py-1" for="btnradio2"
+                    >No</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <button ng-click="create()" type="button" class="btn btn-primary">
+      <i class="fa-solid fa-plus"></i> Create
+    </button>
+    <button ng-click="update()" type="button" class="btn btn-success">
+      <i class="fa-solid fa-download"></i> Update
+    </button>
+    <button ng-click="delete()" type="button" class="btn btn-danger">
+      <i class="fa-solid fa-trash"></i> Delete
+    </button>
+    <button ng-click="reset()" type="button" class="btn btn-info">
+      <i class="fa-solid fa-arrows-rotate"></i> Reset
+    </button>
+  </div>
+</div>

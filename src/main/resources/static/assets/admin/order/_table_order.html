@@ -1,0 +1,51 @@
+<div class="card">
+	<div class="card-header text-center">
+	<h3>LIST ORDER</h3>
+	</div>
+	<div class="card-body p-0">
+		<table class="table table-bordered m-0">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Username</th>
+					<th scope="col">Fullname</th>
+					<th scope="col">Address</th>
+					<th scope="col">CreateDate</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in pager_order.items">
+					<th>{{p.id}}</th>
+					<td>{{p.account.username}}</td>
+					<td>{{p.account.fullname}}</td>
+					<td>{{p.address}}</td>
+					<td>{{p.createDate|date:'dd-MM-yyyy'}}</td>
+					
+					<!-- <td>
+						<button ng-click="edit(p)" type="button" class="btn btn-outline-warning py-1 px-2"><i class="fa-solid fa-pen-to-square"></i></button>
+						<button ng-click="delete(p)" type="button" class="btn btn-outline-danger py-1 px-2"><i class="fa-solid fa-trash"></i></button>
+					</td> -->
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<div class="card-footer text-center">
+	<button ng-click="pager_order.first()" type="button" class="btn btn-danger">
+			<i class="fa-solid fa-hand-point-up"></i>
+		</button>
+		<button ng-click="pager_order.prev()" type="button" class="btn btn-primary">
+			<i class="fa-solid fa-hand-point-left"></i>
+		</button>
+		<span class="btn btn-success">
+			<i class="fa-solid fa-download"></i> {{pager_order.page+1}} of {{pager_order.count}}
+		</span>
+		<button ng-click="pager_order.next()" type="button" class="btn btn-primary">
+			<i class="fa-solid fa-hand-point-right"></i>
+		</button>
+		<button ng-click="pager_order.last()" type="button" class="btn btn-danger">
+			<i class="fa-solid fa-hand-point-down"></i>
+		</button>
+	</div>
+</div>

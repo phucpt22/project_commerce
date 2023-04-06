@@ -1,21 +1,34 @@
 package edu.poly.asm_java6.controller;
 
-import edu.poly.asm_java6.entities.*;
-import edu.poly.asm_java6.reponsitory.DonDatChiTietRepository;
-import edu.poly.asm_java6.reponsitory.DonDatHangRepository;
-import edu.poly.asm_java6.reponsitory.SanPhamRepository;
-import edu.poly.asm_java6.service.CartService;
-import edu.poly.asm_java6.service.SessionService;
+import edu.poly.asm_java6.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class OrderController {
+	@Autowired
+	OrderService orderService;
 
+	@RequestMapping("/order/checkout")
+	public String checkout() {
+		return "order/checkout";
+	}
+
+	@RequestMapping("/order/list")
+	public String list(Model model, HttpServletRequest request) {
+		String username = request.getRemoteUser();
+		model.addAttribute("orders", orderService.findByUsername(username));
+		return "order/list";
+	}
+
+	@RequestMapping("/order/detail/{id}")
+	public String detail(@PathVariable("id") long id, Model model) {
+		model.addAttribute("order", orderService.findById(id));
+		return "order/detail";
+	}
 }
