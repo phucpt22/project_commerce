@@ -24,8 +24,11 @@ app.config(function($routeProvider) {
 		.when("/categories", {
 			templateUrl: "/assets/admin/category/index.html",
 			controller: "category-ctrl"
+		}).when("/homeadmin", {
+			templateUrl: "/assets/admin/index.html",
 		})
 		.otherwise({
-			template: "<h1 class='text-center'>FPT Polytechnic Administrator</h1>"
+			//template: "<h1 class='text-center'>FPT Polytechnic Administrator</h1>",
+			templateUrl: "/assets/admin/current.html"
 		})
 })

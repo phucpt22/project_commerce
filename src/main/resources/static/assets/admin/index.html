@@ -14,6 +14,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<link rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+		  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+		  crossorigin="anonymous" />
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
 <body ng-app="admin-app" class="container-fluid">
@@ -31,14 +39,13 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-start flex-column">
-							<li class="nav-item"> <h4><a class="nav-link active" href="/">Home</a></h4> 
+							<li class="nav-item"> <h4><a class="nav-link active" href="/">Home</a></h4>
 							<li class="nav-item"><a class="nav-link active" aria-current="page" href="#!product">Products</a>
 							</li>
 							<li class="nav-item"><a class="nav-link active" href="#!categories">Categories</a>
 							</li>
 							<li class="nav-item"><a class="nav-link active" href="#!orders">Order</a></li>
 							<li class="nav-item"><a class="nav-link active" href="#!account">Account</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#!authorize">Authorizing</a></li>
 							<li class="nav-item mt-5"><a class="nav-link active" href="/security/logoff">Sign Out</a>
 							</li>
 						</ul>
@@ -47,11 +54,15 @@
 				</div>
 			</nav>
 		</nav>
+
 		<section class="bg-light col p-0 m-3 border rounded-2">
 			<article class="border rounded-2">
 				<div ng-view></div>
+
 			</article>
+
 		</section>
+
 	</div>
 
 	<script src="/assets/admin/admin-app.js"></script>

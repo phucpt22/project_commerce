@@ -1,6 +1,8 @@
 <div class="card">
 	<div class="card-header text-center">
 	<h3>LIST ACCOUNT</h3>
+		<button style="margin-left: 900px" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+				data-bs-whatever="@mdo"> <i class="fa-solid fa-plus"></i> Add</button>
 	</div>
 	<div class="card-body p-0">
 		<table class="table table-bordered m-0">
@@ -46,5 +48,62 @@
 		<button ng-click="pager.last()" type="button" class="btn btn-danger">
 			<i class="fa-solid fa-hand-point-down"></i>
 		</button>
+	</div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">New Account</h1>
+				<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="card">
+						<div class="row g-0">
+							<div class="col-md-4 text-center">
+								<img ng-src="/assets/images/{{form.photo}}" class="img-fluid rounded-start"/>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<div class="row" >
+										<div class="col-md-6 mb-1">
+											<label class="form-label">Username</label>
+											<input ng-model="form.username" type="text" class="form-control" />
+										</div>
+										<div class="col-md-6 mb-1">
+											<label class="form-label">Password</label>
+											<input ng-model="form.password" class="form-control" />
+										</div>
+
+										<div class="col-md-6 mb-1">
+											<label class="form-label">Fullname</label>
+											<input ng-model="form.fullname" type="text" class="form-control" />
+										</div>
+										<div class="col-md-6 mb-1">
+											<label class="form-label">Email</label>
+											<input ng-model="form.email" class="form-control" />
+										</div>
+
+										<div class="col-md-6 mb-1">
+											<label class="form-label">Photo</label>
+											<input class="form-control" type="file" id="formFile"
+												   onchange="angular.element(this).scope().imageChanged(this.files)"/>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+				<button class="btn btn-primary" ng-click="create()" type="button">Create</button>
+			</div>
+		</div>
 	</div>
 </div>
