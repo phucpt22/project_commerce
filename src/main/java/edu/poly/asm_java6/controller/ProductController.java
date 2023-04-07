@@ -39,10 +39,10 @@ public class ProductController {
 	}
 	@RequestMapping("/product/find")
 	public String search(Model model, @RequestParam("search")Optional<String> s) {
-//		List<Product> list;
-//		list = productService.findAll();
+		List<Product> list;
+		list = productService.findAll();
 		List<Product> searchsp = productService.findByName(s.get());
-		//model.addAttribute("searchsp", search);
+		model.addAttribute("items", list);
 		model.addAttribute("items", searchsp);
 
 		return "product/list";
