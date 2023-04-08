@@ -61,6 +61,15 @@ app.controller("product-ctrl", function($scope, $http) {
 			});
 	};
 
+	// $scope.findName = function() {
+	// 	var item = angular.copy($scope.form);
+	// 	$http
+	// 		.get("/rest/products/${item.name}", item)
+	// 		.then((resp) => {
+	// 			$scope.items = resp.data;
+	// 		});
+	// };
+
 	$scope.delete = function(item) {
 		
 		$http

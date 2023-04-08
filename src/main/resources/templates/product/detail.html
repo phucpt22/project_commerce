@@ -11,6 +11,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<link rel="stylesheet" href="detail.css">
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
@@ -55,44 +56,49 @@
 	</div>
 </nav>
 	<main th:object="${item}" class="d-flex p-0 mt-3">
+		<div class="container">
+			<div class="card">
+				<div class="container-fliud">
+					<div class="wrapper row">
+						<div class="preview col-md-6">
+							<div class="preview-pic tab-content">
+								<div class="tab-pane active" style="text-align: center" id="pic-1">
+									<img th:src="@{|/assets/images/*{image}|}" />
+								</div>
 
-		<div class="card p-0 w-25 me-3">
-			<div class="card-header text-bg-info">Hàng Cùng Loại</div>
-			<div class="card-body p-0 ">
-				<div class="list-group list-group-flush">
-					<a class="list-group-item list-group-item-action"
-						th:each="p : *{category.products}"
-						th:href="@{|/product/detail/${p.id}|}"> [[${p.name}]] </a>
-				</div>
-			</div>
-		</div>
-
-		<div class="card w-100">
-			<div>
-				<h2 class="">[[*{name}]]</h2>
-				<hr>
-			</div>
-			<div class="row g-0">
-				<div class="col-md-4 text-center">
-					<img class="card-img-top" th:src="@{|/assets/images/*{image}|}" />
-					<a th:attr="ng-click=@{|cart.add(*{id})|}" class="btn btn-outline-success fs-4">Thêm vào giở hàng <i
-						class="fa-solid fa-cart-plus"></i></a>
-				</div>
-				<div class="col-md-8">
-					<div class="card w-100">
-						<div class="card-body">
-							<h5 class="card-title text-danger">Price: $[[*{price}]]</h5>
+							</div>
+						</div>
+						<div class="details col-md-6">
+							<h1 class="product-title">[[*{name}]]</h1>
+							<div class="rating">
+								<div class="stars">
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+								</div>
+								<span class="review-no">41 reviews</span>
+							</div>
+							<h3>Mô tả:</h3>
+							<p class="product-description">Mẫu lắc mua giống với hình tại website, thực tế sáng và xinh hơn mẫu tại web, Rất hài lòng về chính sách giao hàng của PNJ đóng gói kĩ, hộp đẹp và sang trọng. Khi cần gấp PNJ luôn hỗ trợ đúng ngày
+								đúng thời điểm để tạo điều kiện cho KH thoải mái khi đặt hàng trực tuyến trên website</p>
+							<h4 class="price">Current price: <span style="color: red">$[[*{price}]]</span> </h4>
+							<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 							<p class="card-text">Category: [[*{category.name}]]</p>
-							<p class="card-text text-end">
-							<small class="text-muted">[[*{createDate}]]</small>
-						</p>
+							<p class="card-text">
+								Ngày tạo:
+								<small class="text-muted">[[*{createDate}]]</small>
+
+							<div class="action">
+								<a class="btn btn-success" th:attr="ng-click=@{|cart.add(*{id})|}" > Add to cart </a>
+								<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div></div>
 		</div>
-
 	</main>
 </body>
 </html>
