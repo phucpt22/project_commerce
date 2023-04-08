@@ -1,104 +1,121 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-	  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+>
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 <script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<link rel="stylesheet" href="detail.css">
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!--<link rel="stylesheet" href="detail.css">-->
+<!--<link crossorigin="anonymous"-->
+<!--      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"-->
+<!--      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="-->
+<!--      rel="stylesheet"/>-->
+<!--<link crossorigin="anonymous"-->
+<!--      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"-->
+<!--      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="-->
+<!--      rel="stylesheet"/>-->
+<!--<script-->
+<!--        crossorigin="anonymous"-->
+<!--        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="-->
+<!--        src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>-->
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="/">Trang chủ</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Trang chủ</a>
 
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<div class="d-flex">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item dropdown"><a class="nav-link active dropdown-toggle" href="#" role="button"
-													 data-bs-toggle="dropdown" aria-expanded="false">
-						<span th:if="${#request.remoteUser}">Chào mừng [[${#request.remoteUser}]]</span>
-						<span th:unless="${#request.remoteUser}">Tài khoản</span>
-					</a>
-						<ul class="dropdown-menu dropdown-menu-end">
-							<th:block th:unless="${#request.remoteUser}">
-								<li class="nav-item">
-									<a class="dropdown-item" th:href="@{/security/login/form}">Đăng nhập</a>
-								</li>
-							</th:block>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown"><a aria-expanded="false" class="nav-link active dropdown-toggle" data-bs-toggle="dropdown"
+                                                     href="#" role="button">
+                        <span th:if="${#request.remoteUser}">Chào mừng [[${#request.remoteUser}]]</span>
+                        <span th:unless="${#request.remoteUser}">Tài khoản</span>
+                    </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <th:block th:unless="${#request.remoteUser}">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/security/login/form}">Đăng nhập</a>
+                                </li>
+                            </th:block>
 
-							<th:block th:if="${#request.remoteUser}">
-								<li class="nav-item"><a class="dropdown-item" th:href="@{/security/logoff}">Đăng
-									xuất</a></li>
-								<li class="nav-item"><a class="dropdown-item" th:href="@{/order/list}">Đơn đặt hàng của
-									bạn</a>
-								</li>
-								<li class="nav-item"
-									th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
-									<a class="dropdown-item" th:href="@{/admin/home/index}">Trang quản trị</a>
-								</li>
-							</th:block>
-						</ul>
-					</li>
+                            <th:block th:if="${#request.remoteUser}">
+                                <li class="nav-item"><a class="dropdown-item" th:href="@{/security/logoff}">Đăng
+                                    xuất</a></li>
+                                <li class="nav-item"><a class="dropdown-item" th:href="@{/order/list}">Đơn đặt hàng của
+                                    bạn</a>
+                                </li>
+                                <li class="nav-item"
+                                    th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
+                                    <a class="dropdown-item" th:href="@{/admin/home/index}">Trang quản trị</a>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </li>
 
-				</ul>
-			</div>
-		</div>
-	</div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
-	<main th:object="${item}" class="d-flex p-0 mt-3">
-		<div class="container">
-			<div class="card">
-				<div class="container-fliud">
-					<div class="wrapper row">
-						<div class="preview col-md-6">
-							<div class="preview-pic tab-content">
-								<div class="tab-pane active" style="text-align: center" id="pic-1">
-									<img th:src="@{|/assets/images/*{image}|}" />
-								</div>
+<div class="d-flex p-0 mt-3" th:object="${item}">
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1" style="text-align: center">
+                                <img th:src="@{|/assets/images/*{image}|}"/>
+                            </div>
 
-							</div>
-						</div>
-						<div class="details col-md-6">
-							<h1 class="product-title">[[*{name}]]</h1>
-							<div class="rating">
-								<div class="stars">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star"></span>
-									<span class="fa fa-star"></span>
-								</div>
-								<span class="review-no">41 reviews</span>
-							</div>
-							<h3>Mô tả:</h3>
-							<p class="product-description">Mẫu lắc mua giống với hình tại website, thực tế sáng và xinh hơn mẫu tại web, Rất hài lòng về chính sách giao hàng của PNJ đóng gói kĩ, hộp đẹp và sang trọng. Khi cần gấp PNJ luôn hỗ trợ đúng ngày
-								đúng thời điểm để tạo điều kiện cho KH thoải mái khi đặt hàng trực tuyến trên website</p>
-							<h4 class="price">Current price: <span style="color: red">$[[*{price}]]</span> </h4>
-							<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-							<p class="card-text">Category: [[*{category.name}]]</p>
-							<p class="card-text">
-								Ngày tạo:
-								<small class="text-muted">[[*{createDate}]]</small>
+                        </div>
+                    </div>
+                    <div class="details col-md-6">
+                        <h1 class="product-title">[[*{name}]]</h1>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <span class="review-no">41 reviews</span>
+                        </div>
+                        <h3>Mô tả:</h3>
+                        <p class="product-description">Mẫu lắc mua giống với hình tại website, thực tế sáng và xinh hơn
+                            mẫu tại web, Rất hài lòng về chính sách giao hàng của PNJ đóng gói kĩ, hộp đẹp và sang
+                            trọng. Khi cần gấp PNJ luôn hỗ trợ đúng ngày
+                            đúng thời điểm để tạo điều kiện cho KH thoải mái khi đặt hàng trực tuyến trên website</p>
+                        <h4 class="price">Current price: <span style="color: red">$[[*{price}]]</span></h4>
+                        <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong>
+                        </p>
+                        <p class="card-text">Category: [[*{category.name}]]</p>
+                        <p class="card-text">
+                            Ngày tạo:
+                            <small class="text-muted">[[*{createDate}]]</small>
 
-							<div class="action">
-								<a class="btn btn-success" th:attr="ng-click=@{|cart.add(*{id})|}" > Add to cart </a>
-								<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+                        <div class="action">
+                            <a class="btn btn-success" th:attr="ng-click=@{|cart.add(*{id})|}"> Add to cart </a>
+                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

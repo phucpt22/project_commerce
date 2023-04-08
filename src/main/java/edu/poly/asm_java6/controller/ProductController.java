@@ -20,7 +20,9 @@ public class ProductController {
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		Product item = productService.findById(id);
+		List<Product> list = productService.findAll();
 		model.addAttribute("item", item);
+		model.addAttribute("items", list);
 		return "product/detail";
 	}
 	
