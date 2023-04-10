@@ -4,6 +4,7 @@ import edu.poly.asm_java6.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserService userService;
@@ -41,12 +43,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 
 		http.logout().logoutUrl("/security/logoff").logoutSuccessUrl("/security/logoff/success");
 //		
-//		http.oauth2Login()
-//			.loginPage("/auth/login/form")
-//			.defaultSuccessUrl("/oauth2/login/success", true)
-//			.failureUrl("/auth/login/error")
-//			.authorizationEndpoint()
-//			.baseUri("/oauth2/authorization");
+		http.oauth2Login()
+			.loginPage("/security/login/form")
+			.defaultSuccessUrl("/oauth2/login/success", true)
+			.failureUrl("/security/login/error")
+			.authorizationEndpoint()
+			.baseUri("/oauth2/authorization");
 
 	}
 

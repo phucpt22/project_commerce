@@ -1,11 +1,16 @@
 package edu.poly.asm_java6.controller;
 
+import edu.poly.asm_java6.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
+	@Autowired
+	UserService userService;
 	@RequestMapping("/security/login/form")
 	public String loginForm(Model model) {
 		model.addAttribute("message", "Vui lòng đăng nhập!");
@@ -34,5 +39,10 @@ public class SecurityController {
 	public String unauthoried(Model model) {
 		model.addAttribute("message", "Bạn không có quyền truy xuất!");
 		return "security/login";
+	}
+	@RequestMapping("/oauth2/login/success")
+	public String success(OAuth2AuthenticationToken oauth2) {
+		userService.loginFormOAuth2(oauth2);
+		return "forward:/security/login/success";
 	}
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{/layout/_menu :: nav}"></nav>
+<hr>
+<h2 th:text="${message}"></h2>
+<hr>
+<h3 sec:authorize="!isAuthenticated">
+  <i style="color: red">Chưa đăng nhập</i>
+</h3>
+<ul sec:authorize="isAuthenticated">
+  <li sec:authorize="hasRole('DIRE')">ADMIN</li>
+  <li sec:authorize="hasAnyRole('DIRE','STAFF')">Admin or User</li>
+  <li sec:authorize="hasRole('CUST')">GUEST</li>
+</ul>
+</body>
+</html>
