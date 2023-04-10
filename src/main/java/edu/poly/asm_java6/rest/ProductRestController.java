@@ -23,10 +23,10 @@ public class ProductRestController {
 	public Product getOne(@PathVariable("id")Integer id) {
 		return productService.findById(id);
 	}
-	@GetMapping("{name}")
+	/*@GetMapping("/{name}")
 	public List <Product> getName(@PathVariable("name")String name) {
 		return productService.findByName(name);
-	}
+	}*/
 	
 	@PostMapping
 	public Product creat(@RequestBody Product product ) {

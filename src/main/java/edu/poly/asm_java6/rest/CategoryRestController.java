@@ -16,6 +16,7 @@ public class CategoryRestController {
 	
 	@GetMapping
 	public List<Category> getAll() {
+// test
 		return categoryService.findAll();
 	}
 	
