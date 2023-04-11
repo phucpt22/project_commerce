@@ -33,19 +33,19 @@
 	</div>
 	<div class="card-footer text-center">
 	<button ng-click="pager_order_detail.first()" type="button" class="btn btn-danger">
-			<i class="fa-solid fa-hand-point-up"></i>
+		<i class="fa-solid fa-circle-chevron-left"></i>
 		</button>
 		<button ng-click="pager_order_detail.prev()" type="button" class="btn btn-primary">
-			<i class="fa-solid fa-hand-point-left"></i>
+			<i class="fa-solid fa-backward"></i>
 		</button>
-		<span class="btn btn-success">
+		<span class="btn btn-warning">
 			<i class="fa-solid fa-download"></i> {{pager_order_detail.page+1}} of {{pager_order_detail.count}}
 		</span>
 		<button ng-click="pager_order_detail.next()" type="button" class="btn btn-primary">
-			<i class="fa-solid fa-hand-point-right"></i>
+			<i class="fa-solid fa-forward"></i>
 		</button>
 		<button ng-click="pager_order_detail.last()" type="button" class="btn btn-danger">
-			<i class="fa-solid fa-hand-point-down"></i>
+			<i class="fa-solid fa-circle-chevron-right"></i>
 		</button>
 	</div>
 </div>
