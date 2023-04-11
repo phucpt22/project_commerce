@@ -1,16 +1,29 @@
 package edu.poly.asm_java6.controller;
 
+import edu.poly.asm_java6.dao.AccountDAO;
+import edu.poly.asm_java6.entities.Account;
+import edu.poly.asm_java6.service.ParamService;
 import edu.poly.asm_java6.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class SecurityController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	ParamService paramService;
+	@Autowired
+	AccountDAO dao;
+	@Autowired
+	HttpServletRequest request;
 	@RequestMapping("/security/login/form")
 	public String loginForm(Model model) {
 		model.addAttribute("message", "Vui lòng đăng nhập!");
@@ -44,5 +57,27 @@ public class SecurityController {
 	public String success(OAuth2AuthenticationToken oauth2) {
 		userService.loginFormOAuth2(oauth2);
 		return "forward:/security/login/success";
+	}
+	@PostMapping("/register")
+	public String register(Account nd) {
+		// Đọc các tham số từ form sign up (username, email, password, repeat pass, check agree)
+		String username = paramService.getString("username", "");
+		String password = paramService.getString("password", "");
+		String email = paramService.getString("email", "");
+		String re_pass = paramService.getString("repass", "");
+			if (nd.getPassword().equals(re_pass)) {
+				nd.setFullname("NoName");
+				nd.setEmail(email);
+				nd.setPhoto("Photo.jpg");
+				nd.setPassword(password);
+				nd.setUsername(username);
+				dao.save(nd);
+				request.setAttribute("messageS", "Đăng ký thành công bạn có thể đăng nhập ngay bây giờ!");
+
+			}else {
+				request.setAttribute("messageS", "Mật khẩu và nhập lại mật khẩu không trùng khớp!");
+			}
+
+		return "redirect:/security/login/form";
 	}
 }
