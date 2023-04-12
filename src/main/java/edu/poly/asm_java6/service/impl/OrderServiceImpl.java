@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order findById(long id) {
+	public Order findById(Integer id) {
 		return orderDAO.findById(id).get();
 	}
 
