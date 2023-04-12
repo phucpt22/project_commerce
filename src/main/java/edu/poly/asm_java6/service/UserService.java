@@ -46,11 +46,12 @@ public class UserService implements UserDetailsService {
 
 	public void loginFormOAuth2(OAuth2AuthenticationToken oauth2) {
 		String email = oauth2.getPrincipal().getAttribute("email");
-		String password = Long.toHexString(System.currentTimeMillis());
-		UserDetails user = User.withUsername(email).password(pe.encode(password)).roles("GUEST").build();
+		String fullname = oauth2.getPrincipal().getAttribute("username");
+		//String password = Long.toHexString(System.currentTimeMillis());
+		UserDetails user = User.withUsername(email).password("123").roles("GUEST").build();
+		//UserDetails user2 = User.wit;
 		Authentication auth =new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-
 	}
 
 }

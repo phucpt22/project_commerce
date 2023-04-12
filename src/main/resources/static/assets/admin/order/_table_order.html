@@ -21,15 +21,51 @@
 					<td>{{p.address}}</td>
 					<td>{{p.createDate|date:'dd-MM-yyyy'}}</td>
 					
-					<!-- <td>
-						<button ng-click="edit(p)" type="button" class="btn btn-outline-warning py-1 px-2"><i class="fa-solid fa-pen-to-square"></i></button>
-						<button ng-click="delete(p)" type="button" class="btn btn-outline-danger py-1 px-2"><i class="fa-solid fa-trash"></i></button>
-					</td> -->
+					<td>
+					<a ng-click="show(p)"><span class="material-symbols-sharp btn btn-warning" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-bs-placement="bottom" title="Xem chi tiết"> <i class="fa-solid fa-eye"></i> Show</span></a>
+<!--						<button ng-click="edit(p)" type="button" class="btn btn-outline-warning py-1 px-2"><i class="fa-solid fa-pen-to-square"></i></button>-->
+<!--						<button ng-click="delete(p)" type="button" class="btn btn-outline-danger py-1 px-2"><i class="fa-solid fa-trash"></i></button>-->
+					</td>
 
 				</tr>
 
 			</tbody>
+
 		</table>
+		<div class="accordion" id="accordionExample">
+			<div class="accordion-item">
+				<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div class="accordion-body row">
+						<div class="col">
+							<div class="card-body p-0">
+								<table class="table table-bordered m-0">
+									<thead>
+									<tr>
+										<th scope="col">Id Product</th>
+										<th scope="col">Name</th>
+										<th scope="col">Price</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Amount</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr ng-repeat="item in items">
+										<th>{{item.product.id}}</th>
+										<td>{{item.product.name}}</td>
+										<td>{{item.price}}</td>
+										<td>{{item.quantity}}</td>
+										<td>{{item.price*item.quantity}}</td>
+									</tr>
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="card-footer text-center">
 	<button ng-click="pager_order.first()" type="button" class="btn btn-danger">

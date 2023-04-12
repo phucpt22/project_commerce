@@ -1,6 +1,8 @@
 app.controller("order-ctrl", function($scope, $http) {
 	$scope.items_order = [];
 	$scope.items_order_detail = [];
+	$scope.items = [];
+	$scope.cates = [];
 	$scope.cates = [];
 	$scope.form = {};
 	
@@ -9,11 +11,22 @@ app.controller("order-ctrl", function($scope, $http) {
 			$scope.items_order = resp.data;
 		});
 		$http.get("/rest/orderdetailall").then((resp) => {
+			debugger;
 			$scope.items_order_detail = resp.data;
+			console.log($scope.items_order_detail)
 		});
-		console.log($scope.items_order_detail)
-	};
 
+	};
+	$scope.show = function(item) {
+		debugger;
+		//console.log(${item.order.id});
+		$http
+			.get(`/rest/orderdetailall/${item.id}`, item)
+			.then((resp) => {
+				//debugger;
+				$scope.items = angular.copy(resp.data);
+			});
+	};
 	$scope.initialize();
 
 	

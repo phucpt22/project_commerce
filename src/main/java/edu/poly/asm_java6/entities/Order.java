@@ -19,7 +19,7 @@ import java.util.List;
 public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String address;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")

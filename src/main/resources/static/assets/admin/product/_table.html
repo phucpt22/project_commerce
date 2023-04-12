@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="col-md-6 mb-1">
                                             <label class="form-label">Image</label>
-                                            <input class="form-control" id="formFile" onchange="angular.element(this).scope().imageChanged(this.files)"
+                                            <input class="form-control" ng-model="form.image" name="file" id="formFile" onchange="angular.element(this).scope().imageChanged(this.files)"
                                                    type="file"/>
                                         </div>
                                         <div class="col-md-6 mb-1">

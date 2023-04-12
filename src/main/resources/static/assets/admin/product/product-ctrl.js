@@ -15,6 +15,7 @@ app.controller("product-ctrl", function($scope, $http) {
 		});
 	};
 
+
 	$scope.initialize();
 
 	$scope.edit = function(item) {
@@ -29,7 +30,6 @@ app.controller("product-ctrl", function($scope, $http) {
 			available: true,
 		};
 	};
-
 	$scope.create = function() {
 		var item = angular.copy($scope.form);
 		$http
@@ -61,15 +61,6 @@ app.controller("product-ctrl", function($scope, $http) {
 			});
 	};
 
-	// $scope.findName = function() {
-	// 	var item = angular.copy($scope.form);
-	// 	$http
-	// 		.get("/rest/products/${item.name}", item)
-	// 		.then((resp) => {
-	// 			$scope.items = resp.data;
-	// 		});
-	// };
-
 	$scope.delete = function(item) {
 		
 		$http
@@ -95,7 +86,7 @@ app.controller("product-ctrl", function($scope, $http) {
 				headers: { "Content-Type": undefined },
 			})
 			.then((resp) => {
-				$scope.form.image = resp.data.name;
+				$scope.form.photo = resp.data.name;
 			})
 			.catch((error) => {
 				alert("Lỗi upload hình ảnh!");
