@@ -1,0 +1,24 @@
+<div class="card">
+	<div class="card-header text-center">
+	<h3>Authorizing</h3>
+	</div>
+	<div class="card-body">
+		<table class="table table-bordered m-0">
+			<thead>
+				<tr>
+					<th scope="col">Fullname Admin</th>
+					<th class="text-center" ng-repeat="role in roles">{{role.name}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="acc in admins">
+					<th>{{acc.fullname}}</th>
+					<th class=" text-center" ng-repeat="role in roles"><input class="form-check-input"
+						ng-checked="authority_of(acc,role)"
+						ng-click="authority_changed(acc,role)" type="checkbox"></th>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>

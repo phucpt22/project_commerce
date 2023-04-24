@@ -1,0 +1,154 @@
+<div class="card">
+    <div class="card-header text-center">
+        <h3>LIST PRODUCT</h3>
+        		<button style="margin-left: 900px" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo"> <i class="fa-solid fa-plus"></i> Add</button>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-bordered m-0">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Available?</th>
+                <th scope="col">Tools</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in pager.items">
+                <th>{{p.id}}</th>
+                <td>{{p.name}}</td>
+                <td>{{p.price|number:2}}</td>
+                <td>{{p.createDate|date:'dd-MM-yyyy'}}</td>
+                <td>{{p.image}}</td>
+                <td>{{p.category.name}}</td>
+                <td>{{p.available?'Yes':'No'}}</td>
+                <td>
+                    <button class="btn btn-outline-warning py-1 px-2" ng-click="edit(p)" type="button"><i
+                            class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-outline-danger py-1 px-2" ng-click="delete(p)" type="button"><i
+                            class="fa-solid fa-trash"></i></button>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-danger" ng-click="pager.first()" type="button">
+            <i class="fa-solid fa-circle-chevron-left"></i>
+        </button>
+        <button class="btn btn-primary" ng-click="pager.prev()" type="button">
+            <i class="fa-solid fa-backward"></i>
+        </button>
+        <span class="btn btn-warning">
+			<i class="fa-solid fa-download"></i> {{pager.page+1}} of {{pager.count}}
+		</span>
+        <button class="btn btn-primary" ng-click="pager.next()" type="button">
+            <i class="fa-solid fa-forward"></i>
+        </button>
+        <button class="btn btn-danger" ng-click="pager.last()" type="button">
+            <i class="fa-solid fa-circle-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New Account</h1>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-4 text-center">
+                                <img class="img-fluid rounded-start" ng-src="/assets/images/{{form.image}}"/>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control" ng-model="form.name" type="text"/>
+                                        </div>
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Price</label>
+                                            <input class="form-control" ng-model="form.price"/>
+                                        </div>
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Image</label>
+                                            <input class="form-control" ng-model="form.image" name="file" id="formFile" onchange="angular.element(this).scope().imageChanged(this.files)"
+                                                   type="file"/>
+                                        </div>
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Category</label>
+                                            <select
+                                                    class="form-select"
+                                                    ng-model="form.category.id"
+                                            >
+                                                <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Create Date</label>
+                                            <input
+                                                    class="form-control"
+                                                    ng-model="form.createDate"
+                                                    type="date"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label">Available?</label>
+                                            <div
+                                                    aria-label="Basic radio toggle button group"
+                                                    class="form-control btn-group p-0"
+                                                    role="group"
+                                            >
+                                                <input
+                                                        autocomplete="off"
+                                                        class="btn-check"
+                                                        id="btnradio1"
+                                                        name="btnradio"
+                                                        ng-model="form.available"
+                                                        ng-value="true"
+                                                        type="radio"
+                                                />
+                                                <label class="btn btn-outline-success py-1" for="btnradio1"
+                                                >Yes</label
+                                                >
+                                                <input
+                                                        autocomplete="off"
+                                                        class="btn-check"
+                                                        id="btnradio2"
+                                                        name="btnradio"
+                                                        ng-model="form.available"
+                                                        ng-value="false"
+                                                        type="radio"
+                                                />
+                                                <label class="btn btn-outline-danger py-1" for="btnradio2"
+                                                >No</label
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary" ng-click="create()" type="button">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

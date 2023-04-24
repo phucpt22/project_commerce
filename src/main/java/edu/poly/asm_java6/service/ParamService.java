@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class ParamService {
@@ -25,7 +25,6 @@ public class ParamService {
 		String value = request.getParameter(name);
 		return value != null ? value : defaultValue;
 	}
-	
 
 	public int getInt(String name, int defaultValue) {
 		String result = request.getParameter(name);

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<li class="nav-item dropdown"><a
+        class="nav-link active dropdown-toggle" href="#" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false"> Lọc giá </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/product/list">Mọi giá</a></li>
+    <li><a class="dropdown-item"
+           th:href="@{|/product/filter?price=${1}|}"> Dưới 30</a>
+    </li><li><a class="dropdown-item"
+           th:href="@{|/product/filter?price=${2}|}"> Từ 30 đến 49</a>
+    </li><li><a class="dropdown-item"
+           th:href="@{|/product/filter?price=${3}|}"> Từ 50 đến 69</a>
+    </li><li><a class="dropdown-item"
+           th:href="@{|/product/filter?price=${4}|}"> Từ 70 đến 89</a>
+    </li><li><a class="dropdown-item"
+           th:href="@{|/product/filter?price=${5}|}"> Trên 90</a>
+    </li>
+
+  </ul>
+</li>
+</body>
+</html>

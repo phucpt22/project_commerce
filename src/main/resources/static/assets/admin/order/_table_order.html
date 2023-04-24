@@ -1,0 +1,87 @@
+<div class="card">
+	<div class="card-header text-center">
+	<h3>LIST ORDER</h3>
+	</div>
+	<div class="card-body p-0">
+		<table class="table table-bordered m-0">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Username</th>
+					<th scope="col">Fullname</th>
+					<th scope="col">Address</th>
+					<th scope="col">CreateDate</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in pager_order.items">
+					<th>{{p.id}}</th>
+					<td>{{p.account.username}}</td>
+					<td>{{p.account.fullname}}</td>
+					<td>{{p.address}}</td>
+					<td>{{p.createDate|date:'dd-MM-yyyy'}}</td>
+					
+					<td>
+					<a ng-click="show(p)"><span class="material-symbols-sharp btn btn-warning" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-bs-placement="bottom" title="Xem chi tiết"> <i class="fa-solid fa-eye"></i> Show</span></a>
+<!--						<button ng-click="edit(p)" type="button" class="btn btn-outline-warning py-1 px-2"><i class="fa-solid fa-pen-to-square"></i></button>-->
+<!--						<button ng-click="delete(p)" type="button" class="btn btn-outline-danger py-1 px-2"><i class="fa-solid fa-trash"></i></button>-->
+					</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+		<div class="accordion" id="accordionExample">
+			<div class="accordion-item">
+				<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div class="accordion-body row">
+						<div class="col">
+							<div class="card-body p-0">
+								<table class="table table-bordered m-0">
+									<thead>
+									<tr>
+										<th scope="col">Id Product</th>
+										<th scope="col">Name</th>
+										<th scope="col">Price</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Amount</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr ng-repeat="item in items">
+										<th>{{item.product.id}}</th>
+										<td>{{item.product.name}}</td>
+										<td>{{item.price}}</td>
+										<td>{{item.quantity}}</td>
+										<td>{{item.price*item.quantity}}</td>
+									</tr>
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer text-center">
+	<button ng-click="pager_order.first()" type="button" class="btn btn-danger">
+		<i class="fa-solid fa-circle-chevron-left"></i>
+		</button>
+		<button ng-click="pager_order.prev()" type="button" class="btn btn-primary">
+			<i class="fa-solid fa-backward"></i>
+		</button>
+		<span class="btn btn-warning">
+			<i class="fa-solid fa-download"></i> {{pager_order.page+1}} of {{pager_order.count}}
+		</span>
+		<button ng-click="pager_order.next()" type="button" class="btn btn-primary">
+			<i class="fa-solid fa-forward"></i>
+		</button>
+		<button ng-click="pager_order.last()" type="button" class="btn btn-danger">
+			<i class="fa-solid fa-circle-chevron-right"></i>
+		</button>
+	</div>
+</div>
