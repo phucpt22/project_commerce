@@ -25,7 +25,6 @@ public class ParamService {
 		String value = request.getParameter(name);
 		return value != null ? value : defaultValue;
 	}
-	
 
 	public int getInt(String name, int defaultValue) {
 		String result = request.getParameter(name);

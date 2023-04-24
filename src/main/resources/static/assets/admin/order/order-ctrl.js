@@ -18,7 +18,7 @@ app.controller("order-ctrl", function($scope, $http) {
 
 	};
 	$scope.show = function(item) {
-		debugger;
+		//debugger;
 		//console.log(${item.order.id});
 		$http
 			.get(`/rest/orderdetailall/${item.id}`, item)

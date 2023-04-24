@@ -14,7 +14,16 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.cates = resp.data;
 		});
 	};
-
+	$scope.search = function(p) {
+		//debugger;
+		//console.log(${item.order.id});
+		$http
+			.get(`/rest/products/find/${p.name}`, p)
+			.then((resp) => {
+				//debugger;
+				$scope.items = resp.data;
+			});
+	};
 
 	$scope.initialize();
 

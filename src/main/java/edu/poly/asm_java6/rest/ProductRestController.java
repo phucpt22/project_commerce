@@ -3,6 +3,8 @@ package edu.poly.asm_java6.rest;
 import edu.poly.asm_java6.entities.Product;
 import edu.poly.asm_java6.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +25,19 @@ public class ProductRestController {
 	public Product getOne(@PathVariable("id")Integer id) {
 		return productService.findById(id);
 	}
-//	@GetMapping("{name}")
+//	@GetMapping("/find/{name}")
 //	public List <Product> getName(@PathVariable("name")String name) {
 //		return productService.findByName(name);
 //	}
-	
+
+	@GetMapping("/find/{name}")
+	public ResponseEntity<List<Product>> findProductsByName(@PathVariable String name) {
+		List<Product> products = productService.findByName(name);
+		if (products == null || products.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(products, HttpStatus.OK);
+	}
 	@PostMapping
 	public Product creat(@RequestBody Product product ) {
 		return productService.create(product);

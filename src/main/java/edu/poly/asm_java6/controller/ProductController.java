@@ -1,11 +1,14 @@
 package edu.poly.asm_java6.controller;
 
+import edu.poly.asm_java6.dao.ProductDAO;
 import edu.poly.asm_java6.entities.Product;
+import edu.poly.asm_java6.service.ParamService;
 import edu.poly.asm_java6.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +19,10 @@ import java.util.Optional;
 public class ProductController {
 	@Autowired
 	ProductService productService;
+	@Autowired
+	ParamService paramService;
+	@Autowired
+	ProductDAO dao;
 
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
@@ -39,16 +46,15 @@ public class ProductController {
 			model.addAttribute("items", list);
 		return "product/list";
 	}
-	@RequestMapping("/product/find")
-	public String search(Model model, @RequestParam("search")Optional<String> s) {
-		List<Product> list;
-		list = productService.findAll();
-		List<Product> searchsp = productService.findByName(s.get());
-		model.addAttribute("items", list);
+	@PostMapping("/product/find={name}")
+	public String search(Model model, @PathVariable("name") String s) {
+		String search = paramService.getString("name", "");
+		List<Product> searchsp = dao.findSanPhamByName(s);
+		model.addAttribute("searchsp", search);
 		model.addAttribute("items", searchsp);
-
 		return "product/list";
 	}
+
 	@RequestMapping("/product/filter")
 	public String filter(Model model, @RequestParam("price") Double price) {
 		List<Product> list;
